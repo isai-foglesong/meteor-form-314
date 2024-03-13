@@ -8,6 +8,7 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { StudentFormSchema as formSchema, gpa2Number } from '../forms/StudentFormInfo';
 import { StudentData } from '../../api/studentdata/StudentData';
 import { EnrollmentData } from '../../api/enrollmentdata/EnrollmentData';
+//import Select from 'uniforms-bootstrap5/src/SelectField';
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
@@ -19,11 +20,11 @@ const CreateStudent = () => {
   const submit = (data, formRef) => {
     let insertError;
     const {
-      name, email, bio, level, gpa, enrolled, hobbies, major,
+      name, email, bio, level, gpa, enrolled, hobbies, major, instructor,
     } = data;
     StudentData.insert(
       {
-        name, email, bio, level, gpa: gpa2Number(gpa), hobbies, major,
+        name, email, bio, level, gpa: gpa2Number(gpa), hobbies, major, instructor,
       },
       (error) => { insertError = error; },
     );
@@ -56,6 +57,7 @@ const CreateStudent = () => {
               <Row>
                 <Col><TextField name="name" showInlineError placeholder="Your name" /></Col>
                 <Col><TextField name="email" showInlineError placeholder="Your email" /></Col>
+                <Col><SelectField name="instructor" showInlineError placeholder=" Choose One " /></Col>
               </Row>
               <LongTextField name="bio" showInlineError placeholder="A bit about you" />
               <Row>
